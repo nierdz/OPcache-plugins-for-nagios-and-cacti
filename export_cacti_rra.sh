@@ -4,8 +4,6 @@
 # Date 2014-04-16
 # Author : Kevin MET (Et y'a pas de quoi etre fier)
 
-set -x
-
 REMOTE_SERVER="web0.mnt-tech.fr"
 REMOTE_FOLDER="/home/www/mnt-tech.fr/cacti"
 REMOTE_USER="root"
