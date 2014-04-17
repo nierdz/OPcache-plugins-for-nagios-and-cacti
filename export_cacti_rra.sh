@@ -14,4 +14,4 @@ LOCAL_FOLDER="/opt/cacti/export"
 scp -o StrictHostKeyChecking=no -r "$LOCAL_FOLDER" "$REMOTE_USER"@"$REMOTE_SERVER":/"$REMOTE_FOLDER"
 
 # Et on fait un petit chown/chmod des familles
-ssh -o StrictHostKeyChecking=no "$REMOTE_USER"@"$REMOTE_SERVER" "chown -R www-data:www-data \"$REMOTE_FOLDER\" && chmod -R 664 \"$REMOTE_FOLDER\""
+ssh -o StrictHostKeyChecking=no "$REMOTE_USER"@"$REMOTE_SERVER" "chown -R www-data:www-data \"$REMOTE_FOLDER\" && find \"$REMOTE_FOLDER\" -type f -exec chmod 664 {} \; && find \"$REMOTE_FOLDER\" -type d -exec chmod 775 {} \;"
