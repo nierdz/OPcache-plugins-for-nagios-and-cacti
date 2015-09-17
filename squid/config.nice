@@ -1,0 +1,30 @@
+#! /bin/sh
+#
+# Created by kevin MET
+
+'./configure' \
+'--prefix=/opt/squid-3.3.5-1' \
+'--enable-ssl' \
+'--enable-ssl-crtd' \
+'--with-openssl' \
+'--disable-eui' \
+'--disable-snmp' \
+'--disable-wccp' \
+'--disable-wccpv2' \
+'--disable-http-violations' \
+'--disable-translation' \
+'--disable-auto-locale' \
+'--disable-htcp' \
+'--disable-internal-dns' \
+'--with-default-user=proxy' \
+'--enable-disk-io' \
+'--enable-storeio=ufs,aufs,diskd,rock' \
+'--enable-icmp' \
+'--enable-follow-x-forwarded-for' \
+'--enable-removal-policies=heap,lru' \
+'--enable-delay-pools' \
+'--with-logdir=/var/log/squid/' \
+'--with-pidfile=/var/run/squid.pid' \
+'--with-filedescriptors=8192' \
+"$@"
+

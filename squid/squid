@@ -1,0 +1,114 @@
+#! /bin/sh
+#
+# Squid init script for Debian Wheezy and manual installation
+#
+# Version: 1.0
+#
+# Author: kevin MET https://www.mnt-tech.fr/
+#
+### BEGIN INIT INFO
+# Provides:          squid
+# Required-Start:    $network $remote_fs $syslog
+# Required-Stop:     $network $remote_fs $syslog
+# Should-Start:      $named
+# Should-Stop:       $named
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Squid HTTP Proxy version 3.3
+### END INIT INFO
+
+NAME=squid
+DESC="Squid 3.3"
+DAEMON=/opt/squid/sbin/squid
+PIDFILE=/var/run/$NAME.pid
+CONFIG=/opt/squid/etc/squid.conf
+DAEMON_ARGS="-YC -f $CONFIG"
+
+. /lib/init/vars.sh
+
+. /lib/lsb/init-functions
+
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/opt/squid/sbin
+
+[ -x $DAEMON ] || exit 0
+
+ulimit -n 65535
+
+do_start () {
+	# Create cache dir
+	$DAEMON -z -f $CONFIG
+	umask 027
+	ulimit -n 65535
+	start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON --test > /dev/null || return 1
+        start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON -- $DAEMON_ARGS || return 2
+}
+
+do_stop () {
+	$DAEMON -k shutdown
+        log_action_begin_msg " Waiting"
+        COUNT=0
+	# Wait 60 seconds before squid is totally shutdown
+        while [ -f $PIDFILE ]
+        do
+                sleep 3
+                log_action_cont_msg "."
+                COUNT=`echo $COUNT + 1 | bc`
+                if (($COUNT > 20))
+                then
+                        log_action_end_msg 1
+                        return 1
+                fi
+        done
+        log_action_end_msg 0
+        return 0
+}
+
+do_reload() {
+        start-stop-daemon --stop --signal 1 --quiet --name $NAME
+        return 0
+}
+
+
+case "$1" in
+    start)
+	log_daemon_msg "Starting $DESC" "$NAME"
+	if do_start ; then
+		log_end_msg $?
+	else
+		log_end_msg $?
+	fi
+	;;
+    stop)
+	log_daemon_msg "Stopping $DESC" "$NAME"
+	if do_stop ; then
+		log_end_msg $?
+	else
+		log_end_msg $?
+	fi
+	;;
+    reload|force-reload)
+	log_action_msg "Reloading $DESC configuration files"
+	start-stop-daemon --stop --signal 1 \
+		--pidfile $PIDFILE --quiet --exec $DAEMON
+	log_action_end_msg 0
+	;;
+    restart)
+	log_daemon_msg "Restarting $DESC" "$NAME"
+	do_stop
+	if do_start ; then
+		log_end_msg $?
+	else
+		log_end_msg $?
+	fi
+	;;
+    status)
+	status_of_proc "$DAEMON" "$NAME" && exit 0 || exit $?
+	;;
+    *)
+	echo "Usage: /etc/init.d/$NAME {start|stop|reload|force-reload|restart|status}"
+	exit 3
+	;;
+esac
+
+exit 0
+
