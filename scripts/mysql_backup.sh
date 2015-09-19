@@ -126,4 +126,3 @@ if [ ! "$KEEP_LOCAL" = "ON" ]
 then
 	rm -r $TMP_DIR/*
 fi
-
