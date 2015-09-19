@@ -4,8 +4,14 @@
 # The second part learn ham and spam
 # The last part deletes mails in spam folder
 
+# Directories containing mail in Maildir format
 USER_DIR[0]=/var/vmail/vmail1/mnt-tech.fr/k/e/v/kevin.met-2015.09.14.16.40.21/Maildir
 USER_DIR[1]=/var/vmail/vmail1/ad-tech.ovh/a/d/m/admin-2015.09.14.21.55.14/Maildir
+
+# Domains you don't want in blacklist and whitelist. Typically domains where you're using a contact form
+NEUTRAL_DOMAIN[0]="tenminutestokill.com"
+
+# Other parameters
 SPAM_DIR=".Junk"
 BLACKLIST_CF="/etc/spamassassin/blacklist.cf"
 WHITELIST_CF="/etc/spamassassin/whitelist.cf"
@@ -25,6 +31,12 @@ sort -u /tmp/bl-domains-$$ -o /tmp/bl-domains-$$
 # Remove whitelist from tmp blacklist
 cut -d @ -f 2 $WHITELIST_CF | sort -u > /tmp/wl-domains-$$ 
 comm -2 -3 /tmp/bl-domains-$$ /tmp/wl-domains-$$ > /tmp/bl-domains-proper$$
+
+# Remove domains you don't want in whitelist and blacklist
+for domain in "${NEUTRAL_DOMAIN[@]}"
+do
+	sed -i "/$domain/d" /tmp/bl-domains-proper$$
+done
 
 # Send back data to blacklist.cf
 sed 's/^/blacklist_from *@/' /tmp/bl-domains-proper$$ > $BLACKLIST_CF
