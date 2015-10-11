@@ -2,11 +2,7 @@
 
 # MySQL backup script using mydumper and mysqldump
 # This script has to be executed directly on the MySQL server
-# It sends all the data in a remote host in a folder named by the date
-# To install mydumper you can refer to https://mnt-tech.fr/compilation-et-utilisation-de-mydumper/ (French)
-# Version 0.1 ### 2014-03-14 ### Author:Kévin MET
 # TODO Add support for Nagios NRDP
-# TODO Send mydumper output to $LOG
 
 DATE=`date +%Y-%m-%d`
 MYSQL_HOST="localhost" # Only use localhost or 127.0.0.1
@@ -26,11 +22,11 @@ FIND="/usr/bin/find" # PATH to find binary on the remote host
 TIME_TO_KEEP="30" # Time in days you want to keep old backups
 MYDUMPER_OPT="-c" # Additional options for mydumper
 KEEP_LOCAL="ON" # If set to ON, the last backup is keeped locally in $TMP_DIR
-REMOTE_HOST="test.example.com"
+REMOTE_HOST="xen1.mnt-tech.fr"
 REMOTE_PORT="22"
 REMOTE_USER="root"
 REMOTE_KEY="/root/.ssh/id_rsa"
-REMOTE_DIR="/home/backup/mysql/web0"
+REMOTE_DIR="/home/backup/mysql/web1.mnt-tech.fr"
 
 # LOG
 exec 1> $LOG
