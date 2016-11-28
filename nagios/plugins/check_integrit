@@ -33,7 +33,7 @@ print_usage() {
 }
 
 print_revision() {
-        echo "$1 v$2 (nagios-plugins 1.4.16)"
+        echo "$1 v$2"
         echo -e "This nagios plugins come with ABSOLUTELY NO WARRANTY. You may redistribute\ncopies of the plugins under the terms of the GNU General Public License.\n"
 }
 
@@ -110,13 +110,13 @@ else
 	case $? in
 		0)
 		echo "Check integrit: OK"
-		exit $STATE_OK
 		rm /tmp/integrit-$$
+		exit $STATE_OK
 		;;
 		2)
 		echo "CRITICAL: Integrit fails to do its job"
-		exit $STATE_CRITICAL
 		rm /tmp/integrit-$$
+		exit $STATE_CRITICAL
 		;;
 		1)
 		echo "CRITICAL check /tmp/integrit-$$ to see the last failed report"
