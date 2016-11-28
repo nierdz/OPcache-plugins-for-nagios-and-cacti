@@ -126,11 +126,6 @@ else
 		done</tmp/integrit-$$
 		exit $STATE_CRITICAL
 		;;
-		*)
-		echo "CRITICAL: Integrit fails to do its job"
-		exit $STATE_CRITICAL
-		rm /tmp/integrit-$$
-		;;
 	esac
 fi
 
