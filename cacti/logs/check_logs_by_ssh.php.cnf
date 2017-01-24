@@ -1,0 +1,6 @@
+<?php
+$ssh_user   = 'root';
+$ssh_iden   = '-i /etc/cacti/id_rsa';
+$logs_www_cmd = '/opt/scripts/cacti/parse_www_logs.pl';
+$logs_cache_cmd = '/opt/scripts/cacti/parse_cache_log.pl';
+?>
