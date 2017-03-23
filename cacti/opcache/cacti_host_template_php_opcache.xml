@@ -664,7 +664,7 @@
 			<rrd_step>300</rrd_step>
 			<t_active></t_active>
 			<active>on</active>
-			<rra_items>hash_150024305eaa82b4757d8108046f293e495abb</rra_items>
+			<rra_items>hash_1500240d9c0af8b8acdc7807943937b3208e29|hash_150024e36f3adb9f152adfa5dc50fd2b23337e|hash_150024305eaa82b4757d8108046f293e495abb|hash_150024881dad79055aac29f46aa3c8b9f5ff3c</rra_items>
 		</ds>
 		<items>
 			<hash_080024c7374706bc177f9ed556e067b9ee83aa>
@@ -706,7 +706,7 @@
 			<item_004>
 				<data_input_field_id>hash_070024eb09dfed92ba47590b36685bbdfde736</data_input_field_id>
 				<t_value></t_value>
-				<value>NET-SNMP-EXTEND-MIB::nsExtendOutLine.&quot;phpopcache&quot;.5</value>
+				<value>NET-SNMP-EXTEND-MIB::nsExtendOutLine.\&quot;phpopcache\&quot;.5</value>
 			</item_004>
 			<item_005>
 				<data_input_field_id>hash_0700248f361f8bcb58fc6842053c3b4f3d2774</data_input_field_id>
@@ -751,7 +751,7 @@
 			<rrd_step>300</rrd_step>
 			<t_active></t_active>
 			<active>on</active>
-			<rra_items>hash_150024305eaa82b4757d8108046f293e495abb</rra_items>
+			<rra_items>hash_1500240d9c0af8b8acdc7807943937b3208e29|hash_150024e36f3adb9f152adfa5dc50fd2b23337e|hash_150024305eaa82b4757d8108046f293e495abb|hash_150024881dad79055aac29f46aa3c8b9f5ff3c</rra_items>
 		</ds>
 		<items>
 			<hash_080024a4a4b9aa794d8cf9b8911e776dedbd05>
@@ -793,7 +793,7 @@
 			<item_004>
 				<data_input_field_id>hash_070024eb09dfed92ba47590b36685bbdfde736</data_input_field_id>
 				<t_value></t_value>
-				<value>NET-SNMP-EXTEND-MIB::nsExtendOutLine.&quot;phpopcache&quot;.6</value>
+				<value>NET-SNMP-EXTEND-MIB::nsExtendOutLine.\&quot;phpopcache\&quot;.6</value>
 			</item_004>
 			<item_005>
 				<data_input_field_id>hash_0700248f361f8bcb58fc6842053c3b4f3d2774</data_input_field_id>
@@ -838,7 +838,7 @@
 			<rrd_step>300</rrd_step>
 			<t_active></t_active>
 			<active>on</active>
-			<rra_items>hash_150024305eaa82b4757d8108046f293e495abb</rra_items>
+			<rra_items>hash_1500240d9c0af8b8acdc7807943937b3208e29|hash_150024e36f3adb9f152adfa5dc50fd2b23337e|hash_150024305eaa82b4757d8108046f293e495abb|hash_150024881dad79055aac29f46aa3c8b9f5ff3c</rra_items>
 		</ds>
 		<items>
 			<hash_0800244111f62f47d4ea5f21fb7eaa1653a4b2>
@@ -885,7 +885,7 @@
 			<item_005>
 				<data_input_field_id>hash_070024eb09dfed92ba47590b36685bbdfde736</data_input_field_id>
 				<t_value></t_value>
-				<value>NET-SNMP-EXTEND-MIB::nsExtendOutLine.&quot;phpopcache&quot;.8</value>
+				<value>NET-SNMP-EXTEND-MIB::nsExtendOutLine.\&quot;phpopcache\&quot;.8</value>
 			</item_005>
 			<item_006>
 				<data_input_field_id>hash_0700248f361f8bcb58fc6842053c3b4f3d2774</data_input_field_id>
@@ -925,7 +925,7 @@
 			<rrd_step>300</rrd_step>
 			<t_active></t_active>
 			<active>on</active>
-			<rra_items>hash_150024305eaa82b4757d8108046f293e495abb</rra_items>
+			<rra_items>hash_1500240d9c0af8b8acdc7807943937b3208e29|hash_150024e36f3adb9f152adfa5dc50fd2b23337e|hash_150024305eaa82b4757d8108046f293e495abb|hash_150024881dad79055aac29f46aa3c8b9f5ff3c</rra_items>
 		</ds>
 		<items>
 			<hash_080024e464026c82ff8baa98324b88f0c9986e>
@@ -972,7 +972,7 @@
 			<item_005>
 				<data_input_field_id>hash_070024eb09dfed92ba47590b36685bbdfde736</data_input_field_id>
 				<t_value></t_value>
-				<value>NET-SNMP-EXTEND-MIB::nsExtendOutLine.&quot;phpopcache&quot;.7</value>
+				<value>NET-SNMP-EXTEND-MIB::nsExtendOutLine.\&quot;phpopcache\&quot;.7</value>
 			</item_005>
 			<item_006>
 				<data_input_field_id>hash_0700248f361f8bcb58fc6842053c3b4f3d2774</data_input_field_id>
@@ -1012,7 +1012,7 @@
 			<rrd_step>300</rrd_step>
 			<t_active></t_active>
 			<active>on</active>
-			<rra_items>hash_150024305eaa82b4757d8108046f293e495abb</rra_items>
+			<rra_items>hash_1500240d9c0af8b8acdc7807943937b3208e29|hash_150024e36f3adb9f152adfa5dc50fd2b23337e|hash_150024305eaa82b4757d8108046f293e495abb|hash_150024881dad79055aac29f46aa3c8b9f5ff3c</rra_items>
 		</ds>
 		<items>
 			<hash_080024f52d3e22c1a41bebd10b550691ffd7bb>
@@ -1054,7 +1054,7 @@
 			<item_004>
 				<data_input_field_id>hash_070024eb09dfed92ba47590b36685bbdfde736</data_input_field_id>
 				<t_value></t_value>
-				<value>NET-SNMP-EXTEND-MIB::nsExtendOutLine.&quot;phpopcache&quot;.1</value>
+				<value>NET-SNMP-EXTEND-MIB::nsExtendOutLine.\&quot;phpopcache\&quot;.1</value>
 			</item_004>
 			<item_005>
 				<data_input_field_id>hash_0700248f361f8bcb58fc6842053c3b4f3d2774</data_input_field_id>
@@ -1099,7 +1099,7 @@
 			<rrd_step>300</rrd_step>
 			<t_active></t_active>
 			<active>on</active>
-			<rra_items>hash_150024305eaa82b4757d8108046f293e495abb</rra_items>
+			<rra_items>hash_1500240d9c0af8b8acdc7807943937b3208e29|hash_150024e36f3adb9f152adfa5dc50fd2b23337e|hash_150024305eaa82b4757d8108046f293e495abb|hash_150024881dad79055aac29f46aa3c8b9f5ff3c</rra_items>
 		</ds>
 		<items>
 			<hash_080024a8952947f986c7ab18579b3e13c79957>
@@ -1119,57 +1119,57 @@
 		</items>
 		<data>
 			<item_000>
-				<data_input_field_id>hash_0700241d6512aa0d5c7ed27cf1b31a19108557</data_input_field_id>
+				<data_input_field_id>hash_0700247d574d58976da3fa107a6112154d3239</data_input_field_id>
 				<t_value></t_value>
 				<value></value>
 			</item_000>
 			<item_001>
-				<data_input_field_id>hash_0700247d574d58976da3fa107a6112154d3239</data_input_field_id>
+				<data_input_field_id>hash_070024d5f25f4bfae9b7a959271393b28511ac</data_input_field_id>
 				<t_value></t_value>
 				<value></value>
 			</item_001>
 			<item_002>
-				<data_input_field_id>hash_070024d5f25f4bfae9b7a959271393b28511ac</data_input_field_id>
+				<data_input_field_id>hash_070024421367e79863e84b7dbedea85c11abfb</data_input_field_id>
 				<t_value></t_value>
 				<value></value>
 			</item_002>
 			<item_003>
-				<data_input_field_id>hash_070024421367e79863e84b7dbedea85c11abfb</data_input_field_id>
+				<data_input_field_id>hash_070024d4f3aca6c8dff15579baf794087a836b</data_input_field_id>
 				<t_value></t_value>
 				<value></value>
 			</item_003>
 			<item_004>
 				<data_input_field_id>hash_070024eb09dfed92ba47590b36685bbdfde736</data_input_field_id>
 				<t_value></t_value>
-				<value>NET-SNMP-EXTEND-MIB::nsExtendOutLine.&quot;phpopcache&quot;.3</value>
+				<value>NET-SNMP-EXTEND-MIB::nsExtendOutLine.\&quot;phpopcache\&quot;.3</value>
 			</item_004>
 			<item_005>
-				<data_input_field_id>hash_070024d4f3aca6c8dff15579baf794087a836b</data_input_field_id>
+				<data_input_field_id>hash_0700248f361f8bcb58fc6842053c3b4f3d2774</data_input_field_id>
 				<t_value></t_value>
 				<value></value>
 			</item_005>
 			<item_006>
-				<data_input_field_id>hash_0700248f361f8bcb58fc6842053c3b4f3d2774</data_input_field_id>
+				<data_input_field_id>hash_07002492a8e6ed621e5b4e544847840b40c2d2</data_input_field_id>
 				<t_value></t_value>
 				<value></value>
 			</item_006>
 			<item_007>
-				<data_input_field_id>hash_07002492a8e6ed621e5b4e544847840b40c2d2</data_input_field_id>
+				<data_input_field_id>hash_07002468cf31d36b342e7458c052216a2bf9b3</data_input_field_id>
 				<t_value></t_value>
 				<value></value>
 			</item_007>
 			<item_008>
-				<data_input_field_id>hash_07002468cf31d36b342e7458c052216a2bf9b3</data_input_field_id>
+				<data_input_field_id>hash_0700249cd1dbbb2eee45e0933adccda2f9f2c5</data_input_field_id>
 				<t_value></t_value>
 				<value></value>
 			</item_008>
 			<item_009>
-				<data_input_field_id>hash_0700249cd1dbbb2eee45e0933adccda2f9f2c5</data_input_field_id>
+				<data_input_field_id>hash_070024ec1228d2b1827044499ba51976299bd2</data_input_field_id>
 				<t_value></t_value>
 				<value></value>
 			</item_009>
 			<item_010>
-				<data_input_field_id>hash_070024ec1228d2b1827044499ba51976299bd2</data_input_field_id>
+				<data_input_field_id>hash_0700241d6512aa0d5c7ed27cf1b31a19108557</data_input_field_id>
 				<t_value></t_value>
 				<value></value>
 			</item_010>
@@ -1186,7 +1186,7 @@
 			<rrd_step>300</rrd_step>
 			<t_active></t_active>
 			<active>on</active>
-			<rra_items>hash_150024305eaa82b4757d8108046f293e495abb</rra_items>
+			<rra_items>hash_1500240d9c0af8b8acdc7807943937b3208e29|hash_150024e36f3adb9f152adfa5dc50fd2b23337e|hash_150024305eaa82b4757d8108046f293e495abb|hash_150024881dad79055aac29f46aa3c8b9f5ff3c</rra_items>
 		</ds>
 		<items>
 			<hash_080024a18822093764a179691b1784a1230512>
@@ -1228,7 +1228,7 @@
 			<item_004>
 				<data_input_field_id>hash_070024eb09dfed92ba47590b36685bbdfde736</data_input_field_id>
 				<t_value></t_value>
-				<value>NET-SNMP-EXTEND-MIB::nsExtendOutLine.&quot;phpopcache&quot;.2</value>
+				<value>NET-SNMP-EXTEND-MIB::nsExtendOutLine.\&quot;phpopcache\&quot;.2</value>
 			</item_004>
 			<item_005>
 				<data_input_field_id>hash_0700248f361f8bcb58fc6842053c3b4f3d2774</data_input_field_id>
@@ -1273,7 +1273,7 @@
 			<rrd_step>300</rrd_step>
 			<t_active></t_active>
 			<active>on</active>
-			<rra_items>hash_150024305eaa82b4757d8108046f293e495abb</rra_items>
+			<rra_items>hash_150024c21df5178e5c955013591239eb0afd46|hash_1500240d9c0af8b8acdc7807943937b3208e29|hash_150024e36f3adb9f152adfa5dc50fd2b23337e|hash_150024881dad79055aac29f46aa3c8b9f5ff3c</rra_items>
 		</ds>
 		<items>
 			<hash_0800244402b13f1a055f8b220eec02a97197fd>
@@ -1315,7 +1315,7 @@
 			<item_004>
 				<data_input_field_id>hash_070024eb09dfed92ba47590b36685bbdfde736</data_input_field_id>
 				<t_value></t_value>
-				<value>NET-SNMP-EXTEND-MIB::nsExtendOutLine.&quot;phpopcache&quot;.4</value>
+				<value>NET-SNMP-EXTEND-MIB::nsExtendOutLine.\&quot;phpopcache\&quot;.4</value>
 			</item_004>
 			<item_005>
 				<data_input_field_id>hash_0700248f361f8bcb58fc6842053c3b4f3d2774</data_input_field_id>
@@ -1360,7 +1360,7 @@
 			<rrd_step>300</rrd_step>
 			<t_active></t_active>
 			<active>on</active>
-			<rra_items>hash_150024305eaa82b4757d8108046f293e495abb</rra_items>
+			<rra_items>hash_1500240d9c0af8b8acdc7807943937b3208e29|hash_150024e36f3adb9f152adfa5dc50fd2b23337e|hash_150024305eaa82b4757d8108046f293e495abb|hash_150024881dad79055aac29f46aa3c8b9f5ff3c</rra_items>
 		</ds>
 		<items>
 			<hash_080024d17a0d56d020a050621c952bb73c1507>
@@ -1380,57 +1380,57 @@
 		</items>
 		<data>
 			<item_000>
-				<data_input_field_id>hash_0700241d6512aa0d5c7ed27cf1b31a19108557</data_input_field_id>
+				<data_input_field_id>hash_0700247d574d58976da3fa107a6112154d3239</data_input_field_id>
 				<t_value></t_value>
 				<value></value>
 			</item_000>
 			<item_001>
-				<data_input_field_id>hash_0700247d574d58976da3fa107a6112154d3239</data_input_field_id>
+				<data_input_field_id>hash_070024d5f25f4bfae9b7a959271393b28511ac</data_input_field_id>
 				<t_value></t_value>
 				<value></value>
 			</item_001>
 			<item_002>
-				<data_input_field_id>hash_070024d5f25f4bfae9b7a959271393b28511ac</data_input_field_id>
+				<data_input_field_id>hash_070024421367e79863e84b7dbedea85c11abfb</data_input_field_id>
 				<t_value></t_value>
 				<value></value>
 			</item_002>
 			<item_003>
-				<data_input_field_id>hash_070024421367e79863e84b7dbedea85c11abfb</data_input_field_id>
+				<data_input_field_id>hash_070024d4f3aca6c8dff15579baf794087a836b</data_input_field_id>
 				<t_value></t_value>
 				<value></value>
 			</item_003>
 			<item_004>
-				<data_input_field_id>hash_070024d4f3aca6c8dff15579baf794087a836b</data_input_field_id>
-				<t_value></t_value>
-				<value></value>
-			</item_004>
-			<item_005>
 				<data_input_field_id>hash_070024eb09dfed92ba47590b36685bbdfde736</data_input_field_id>
 				<t_value></t_value>
-				<value>NET-SNMP-EXTEND-MIB::nsExtendOutLine.\&quot;phpopcache\&quot;.9</value>
+				<value>NET-SNMP-EXTEND-MIB::nsExtendOutLine.\\\&quot;phpopcache\\\&quot;.9</value>
+			</item_004>
+			<item_005>
+				<data_input_field_id>hash_0700248f361f8bcb58fc6842053c3b4f3d2774</data_input_field_id>
+				<t_value></t_value>
+				<value></value>
 			</item_005>
 			<item_006>
-				<data_input_field_id>hash_0700248f361f8bcb58fc6842053c3b4f3d2774</data_input_field_id>
+				<data_input_field_id>hash_07002492a8e6ed621e5b4e544847840b40c2d2</data_input_field_id>
 				<t_value></t_value>
 				<value></value>
 			</item_006>
 			<item_007>
-				<data_input_field_id>hash_07002492a8e6ed621e5b4e544847840b40c2d2</data_input_field_id>
+				<data_input_field_id>hash_07002468cf31d36b342e7458c052216a2bf9b3</data_input_field_id>
 				<t_value></t_value>
 				<value></value>
 			</item_007>
 			<item_008>
-				<data_input_field_id>hash_07002468cf31d36b342e7458c052216a2bf9b3</data_input_field_id>
+				<data_input_field_id>hash_0700249cd1dbbb2eee45e0933adccda2f9f2c5</data_input_field_id>
 				<t_value></t_value>
 				<value></value>
 			</item_008>
 			<item_009>
-				<data_input_field_id>hash_0700249cd1dbbb2eee45e0933adccda2f9f2c5</data_input_field_id>
+				<data_input_field_id>hash_070024ec1228d2b1827044499ba51976299bd2</data_input_field_id>
 				<t_value></t_value>
 				<value></value>
 			</item_009>
 			<item_010>
-				<data_input_field_id>hash_070024ec1228d2b1827044499ba51976299bd2</data_input_field_id>
+				<data_input_field_id>hash_0700241d6512aa0d5c7ed27cf1b31a19108557</data_input_field_id>
 				<t_value></t_value>
 				<value></value>
 			</item_010>
@@ -1447,7 +1447,7 @@
 			<rrd_step>300</rrd_step>
 			<t_active></t_active>
 			<active>on</active>
-			<rra_items>hash_150024305eaa82b4757d8108046f293e495abb</rra_items>
+			<rra_items>hash_1500240d9c0af8b8acdc7807943937b3208e29|hash_150024e36f3adb9f152adfa5dc50fd2b23337e|hash_150024305eaa82b4757d8108046f293e495abb|hash_150024881dad79055aac29f46aa3c8b9f5ff3c</rra_items>
 		</ds>
 		<items>
 			<hash_080024b76c5002a4a2e79ac53d08b21341469f>
@@ -1467,57 +1467,57 @@
 		</items>
 		<data>
 			<item_000>
-				<data_input_field_id>hash_0700241d6512aa0d5c7ed27cf1b31a19108557</data_input_field_id>
+				<data_input_field_id>hash_0700247d574d58976da3fa107a6112154d3239</data_input_field_id>
 				<t_value></t_value>
 				<value></value>
 			</item_000>
 			<item_001>
-				<data_input_field_id>hash_0700247d574d58976da3fa107a6112154d3239</data_input_field_id>
+				<data_input_field_id>hash_070024d5f25f4bfae9b7a959271393b28511ac</data_input_field_id>
 				<t_value></t_value>
 				<value></value>
 			</item_001>
 			<item_002>
-				<data_input_field_id>hash_070024d5f25f4bfae9b7a959271393b28511ac</data_input_field_id>
+				<data_input_field_id>hash_070024421367e79863e84b7dbedea85c11abfb</data_input_field_id>
 				<t_value></t_value>
 				<value></value>
 			</item_002>
 			<item_003>
-				<data_input_field_id>hash_070024421367e79863e84b7dbedea85c11abfb</data_input_field_id>
+				<data_input_field_id>hash_070024d4f3aca6c8dff15579baf794087a836b</data_input_field_id>
 				<t_value></t_value>
 				<value></value>
 			</item_003>
 			<item_004>
-				<data_input_field_id>hash_070024d4f3aca6c8dff15579baf794087a836b</data_input_field_id>
-				<t_value></t_value>
-				<value></value>
-			</item_004>
-			<item_005>
 				<data_input_field_id>hash_070024eb09dfed92ba47590b36685bbdfde736</data_input_field_id>
 				<t_value></t_value>
-				<value>NET-SNMP-EXTEND-MIB::nsExtendOutLine.\&quot;phpopcache\&quot;.10</value>
+				<value>NET-SNMP-EXTEND-MIB::nsExtendOutLine.\\\&quot;phpopcache\\\&quot;.10</value>
+			</item_004>
+			<item_005>
+				<data_input_field_id>hash_0700248f361f8bcb58fc6842053c3b4f3d2774</data_input_field_id>
+				<t_value></t_value>
+				<value></value>
 			</item_005>
 			<item_006>
-				<data_input_field_id>hash_0700248f361f8bcb58fc6842053c3b4f3d2774</data_input_field_id>
+				<data_input_field_id>hash_07002492a8e6ed621e5b4e544847840b40c2d2</data_input_field_id>
 				<t_value></t_value>
 				<value></value>
 			</item_006>
 			<item_007>
-				<data_input_field_id>hash_07002492a8e6ed621e5b4e544847840b40c2d2</data_input_field_id>
+				<data_input_field_id>hash_07002468cf31d36b342e7458c052216a2bf9b3</data_input_field_id>
 				<t_value></t_value>
 				<value></value>
 			</item_007>
 			<item_008>
-				<data_input_field_id>hash_07002468cf31d36b342e7458c052216a2bf9b3</data_input_field_id>
+				<data_input_field_id>hash_0700249cd1dbbb2eee45e0933adccda2f9f2c5</data_input_field_id>
 				<t_value></t_value>
 				<value></value>
 			</item_008>
 			<item_009>
-				<data_input_field_id>hash_0700249cd1dbbb2eee45e0933adccda2f9f2c5</data_input_field_id>
+				<data_input_field_id>hash_070024ec1228d2b1827044499ba51976299bd2</data_input_field_id>
 				<t_value></t_value>
 				<value></value>
 			</item_009>
 			<item_010>
-				<data_input_field_id>hash_070024ec1228d2b1827044499ba51976299bd2</data_input_field_id>
+				<data_input_field_id>hash_0700241d6512aa0d5c7ed27cf1b31a19108557</data_input_field_id>
 				<t_value></t_value>
 				<value></value>
 			</item_010>
@@ -1629,6 +1629,22 @@
 			</hash_0700241d6512aa0d5c7ed27cf1b31a19108557>
 		</fields>
 	</hash_0300241a19570955850149d45f5fd1ce735f0e>
+	<hash_1500240d9c0af8b8acdc7807943937b3208e29>
+		<name>Weekly (30 Minute Average)</name>
+		<x_files_factor>0.5</x_files_factor>
+		<steps>6</steps>
+		<rows>700</rows>
+		<timespan>604800</timespan>
+		<cf_items>1|3</cf_items>
+	</hash_1500240d9c0af8b8acdc7807943937b3208e29>
+	<hash_150024e36f3adb9f152adfa5dc50fd2b23337e>
+		<name>Yearly (1 Day Average)</name>
+		<x_files_factor>0.5</x_files_factor>
+		<steps>288</steps>
+		<rows>797</rows>
+		<timespan>33053184</timespan>
+		<cf_items>1|3</cf_items>
+	</hash_150024e36f3adb9f152adfa5dc50fd2b23337e>
 	<hash_150024305eaa82b4757d8108046f293e495abb>
 		<name>Daily (5 Minute Average)</name>
 		<x_files_factor>0.5</x_files_factor>
@@ -1637,6 +1653,22 @@
 		<timespan>86400</timespan>
 		<cf_items>1|2|3|4</cf_items>
 	</hash_150024305eaa82b4757d8108046f293e495abb>
+	<hash_150024881dad79055aac29f46aa3c8b9f5ff3c>
+		<name>Monthly (2 Hour Average)</name>
+		<x_files_factor>0.5</x_files_factor>
+		<steps>24</steps>
+		<rows>775</rows>
+		<timespan>2678400</timespan>
+		<cf_items>1|2|3|4</cf_items>
+	</hash_150024881dad79055aac29f46aa3c8b9f5ff3c>
+	<hash_150024c21df5178e5c955013591239eb0afd46>
+		<name>Daily (5 Minute Average)</name>
+		<x_files_factor>0.5</x_files_factor>
+		<steps>1</steps>
+		<rows>600</rows>
+		<timespan>86400</timespan>
+		<cf_items>1|3</cf_items>
+	</hash_150024c21df5178e5c955013591239eb0afd46>
 	<hash_060024e41807ba2d25a17e105b3a75ca85e31f>
 		<name>Normal</name>
 		<gprint_text>%8.2lf %s</gprint_text>
