@@ -6,6 +6,7 @@
 # 
 # 2017 01 15 : First Release
 # 2017 03 22 : Some minor bugfix
+# 2017 03 23 : Modify Output when OK
 #
 # TODO: Some refactoring but I'm too lazy to do it :)
 #       Maybe add some more tests like wasted memory...
@@ -13,7 +14,7 @@
 PROGNAME=`/usr/bin/basename $0`
 PROGPATH=`echo $0 | sed -e 's,[\\/][^\\/][^\\/]*$,,'`
 TITLE="Check PHP Opcache - Nagios plugin to health check PHP OPcache (cached keys, memory, interned strings memory, ratio hits/misses, restarts)"
-REVISION="1.0"
+REVISION="1.1"
 VERSIONINFO="$TITLE\n
 Author: Kevin MET https://mnt-tech.fr/\n
 Version: $REVISION\n"
@@ -252,4 +253,4 @@ else
 fi
 
 # If all went good exit with OK
-echo "OK: It's all good !"; exit $STATE_OK; 
+echo "OK: Memory $PERCENT_MEMORY%, Keys $PERCENT_KEYS%, String Memory $PERCENT_STRMEMORY%, Hits/Misses $PERCENT_RATIO%, Restarts $TOTAL_RESTART"; exit $STATE_OK; 
