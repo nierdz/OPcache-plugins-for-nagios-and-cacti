@@ -1,0 +1,255 @@
+#! /bin/bash
+#
+# Check status of PHP Opcache
+# Written by Kevin MET https://mnt-tech.fr/
+# Created: 2017 01 15
+# 
+# 2017 01 15 : First Release
+# 2017 03 22 : Some minor bugfix
+#
+# TODO: Some refactoring but I'm too lazy to do it :)
+#       Maybe add some more tests like wasted memory...
+
+PROGNAME=`/usr/bin/basename $0`
+PROGPATH=`echo $0 | sed -e 's,[\\/][^\\/][^\\/]*$,,'`
+TITLE="Check PHP Opcache - Nagios plugin to health check PHP OPcache (cached keys, memory, interned strings memory, ratio hits/misses, restarts)"
+REVISION="1.0"
+VERSIONINFO="$TITLE\n
+Author: Kevin MET https://mnt-tech.fr/\n
+Version: $REVISION\n"
+
+# States
+STATE_OK=0
+STATE_WARNING=1
+STATE_CRITICAL=2
+STATE_UNKNOWN=3
+
+print_usage() {
+	echo "
+Usage: $PROGNAME --url http://example.com/opcache_status.php [ --keys %W:%C ] [ --memory %W:%C ] [ --string-memory %W:%C ] [ --ratio %W:%C ] [ --restart W:C ]
+
+Example: $PROGNAME --url http://example.com/opcache_status.php --keys 70:80 --memory 70:80 --string-memory 70:80 --ratio 5:10 --restart 1:2
+
+Options:
+--url or -U            The url to the file opcache_status.php
+
+--keys or -K            Number of keys in cache compared to max_accelerated_files
+                        You need to use percent for warning and critical thresholds
+                        Defaults: warning 80%, critical 90%
+
+--memory or -M          Memory used
+                        You need to use percent for warning and critical thresholds
+                        Defaults: warning 80%, critical 90%
+
+--string-memory or -S   Memory used by interned strings
+                        You need to use percent for warning and critical thresholds
+                        Defaults: warning 80%, critical 90%
+
+--ratio or -R           Ratio hits/misses
+                        You need to use percent for warning and critical thresholds
+                        Defaults: warning 10%, critical 20%
+
+--restart or -F         Number of restarts (oom_restarts and hash_restarts)
+                        You need to set numbers of restarts for warning and critical thresholds
+                        Defaults: warning 2, critical 5
+
+Note: You need curl to make this plugin work.
+      You also need opcache_status.php file (check https://github.com/...
+      For some explanation on this plugin and the Cacti version you can read this blog post (French)
+"
+}
+
+print_revision() {
+	echo -e $VERSIONINFO
+	echo -e "This nagios plugins come with ABSOLUTELY NO WARRANTY. You may redistribute\ncopies of the plugins under the terms of the GNU General Public License.\n"
+}
+
+print_help() {
+	print_revision
+	print_usage
+}
+
+while test -n "$1"; do
+	case "$1" in
+		--help|-h|-H)
+			print_help
+			exit $STATE_OK
+			;;
+		--version|-v|-V)
+			print_revision
+			exit $STATE_OK
+			;;
+		--url|-u|-U)
+			URL=$2
+			shift
+			;;
+		--keys|-k|-K)
+			KEYS=$2
+			shift
+			;;
+		--memory|-m|-M)
+			MEMORY=$2
+			shift
+			;;
+		--string-memory|-s|-S)
+			STRMEMORY=$2
+			shift
+			;;
+		--ratio|-r|-R)
+			RATIO=$2
+			shift
+			;;
+		--restart|-f|-F)
+			RESTART=$2
+			shift
+			;;
+		*)
+			echo "UNKNOWN: Unknown argument: $1"
+			print_usage
+			exit $STATE_UNKNOWN
+			;;
+	esac
+	shift
+done
+
+check_syntax() {
+	[[ $1 =~ ^[0-9]{1,3}:[0-9]{1,3}$ ]] || { echo "UNKNOWN: Syntax problem with $2"; print_usage; exit $STATE_UNKNOWN; }
+}
+
+# Check for curl
+command -v curl > /dev/null 2>&1 || { echo "UNKNOWN: curl is not installed"; exit $STATE_UNKNOWN; }
+
+# Check for -H or --host which is the only required option
+if [ -z "$URL" ]
+then
+	echo "UNKNOWN: You need to use --url"; exit $STATE_UNKNOWN;
+fi
+
+# Check syntax's options and set default if not defined
+if [ -z "$KEYS" ]
+then
+	KEYS=80:90
+else
+	check_syntax $KEYS "--keys"
+fi
+
+if [ -z "$MEMORY" ]
+then
+	MEMORY=80:90
+else
+	check_syntax $MEMORY "--memory"
+fi
+if [ -z "$STRMEMORY" ]
+then
+	STRMEMORY=80:90
+else
+	check_syntax $STRMEMORY "--string-memory"
+fi
+if [ -z "$RATIO" ]
+then
+	RATIO=10:20
+else
+	check_syntax $RATIO "--ratio"
+fi
+if [ -z "$RESTART" ]
+then
+	RESTART=2:5
+else
+	check_syntax $RESTART "--restart"
+fi
+
+# Check if opcache_status.php is accessible
+STATUS_CODE=$(curl -s -o /dev/null -w "%{http_code}" $URL 2>/dev/null)
+if [ "$STATUS_CODE" != "200" ]
+then
+	echo "UNKNOWN: The file opcache_status.php is not accessible"; exit $STATE_UNKNOWN;
+fi
+
+RESULTS=$(curl --silent $URL 2>/dev/null)
+if [ $? -ne 0 ]
+then
+	echo "UNKNOWN: The file opcache_status.php is not accessible"; exit $STATE_UNKNOWN;
+fi
+
+# Parse results
+used_memory=$(echo $RESULTS | awk '{print $1}')
+free_memory=$(echo $RESULTS | awk '{print $2}')
+num_cached_keys=$(echo $RESULTS | awk '{print $5}')
+max_cached_keys=$(echo $RESULTS | awk '{print $6}')
+used_strmemory=$(echo $RESULTS | awk '{print $9}')
+free_strmemory=$(echo $RESULTS | awk '{print $10}')
+hits=$(echo $RESULTS | awk '{print $7}')
+misses=$(echo $RESULTS | awk '{print $8}')
+oom_restarts=$(echo $RESULTS | awk '{print $11}')
+hash_restarts=$(echo $RESULTS | awk '{print $12}')
+
+# Parse options
+WARNING_MEMORY=$(echo $MEMORY | cut -d: -f1)
+CRITICAL_MEMORY=$(echo $MEMORY | cut -d: -f2)
+WARNING_KEYS=$(echo $KEYS | cut -d: -f1)
+CRITICAL_KEYS=$(echo $KEYS | cut -d: -f2)
+WARNING_STRMEMORY=$(echo $STRMEMORY | cut -d: -f1)
+CRITICAL_STRMEMORY=$(echo $STRMEMORY | cut -d: -f2)
+WARNING_RATIO=$(echo $RATIO | cut -d: -f1)
+CRITICAL_RATIO=$(echo $RATIO | cut -d: -f2)
+WARNING_RESTART=$(echo $RESTART | cut -d: -f1)
+CRITICAL_RESTART=$(echo $RESTART | cut -d: -f2)
+
+# Verifications
+PERCENT_MEMORY=$((100*$used_memory/$free_memory))
+if (( $(echo "$PERCENT_MEMORY >= $CRITICAL_MEMORY" |bc -l) ))
+then
+	echo "CRITICAL: $PERCENT_MEMORY% of memory used"; exit $STATE_CRITICAL;
+else
+	if (( $(echo "$PERCENT_MEMORY >= $WARNING_MEMORY" |bc -l) ))
+	then
+		echo "WARNING: $PERCENT_MEMORY% of memory used"; exit $STATE_WARNING;
+	fi
+fi	
+
+PERCENT_KEYS=$((100*$num_cached_keys/$max_cached_keys))
+if (( $(echo "$PERCENT_KEYS >= $CRITICAL_KEYS" |bc -l) ))
+then
+	echo "CRITICAL: $PERCENT_KEYS% of keys used"; exit $STATE_CRITICAL;
+else
+	if (( $(echo "$PERCENT_KEYS >= $WARNING_KEYS" |bc -l) ))
+	then
+		echo "WARNING: $PERCENT_KEYS% of keys used"; exit $STATE_WARNING;
+	fi
+fi
+
+PERCENT_STRMEMORY=$((100*$used_strmemory/$free_strmemory))
+if (( $(echo "$PERCENT_STRMEMORY >= $CRITICAL_STRMEMORY" |bc -l) ))
+then
+	echo "CRITICAL: $PERCENT_STRMEMORY% of string memory used"; exit $STATE_CRITICAL;
+else
+	if (( $(echo "$PERCENT_STRMEMORY >= $WARNING_STRMEMORY" |bc -l) ))
+	then
+		echo "WARNING: $PERCENT_STRMEMORY% of string memory used"; exit $STATE_WARNING;
+	fi
+fi	
+
+PERCENT_RATIO=$((100*$misses/$hits))
+if (( $(echo "$PERCENT_RATIO >= $CRITICAL_RATIO" |bc -l) ))
+then
+	echo "CRITICAL: ratio of misses/hits is $PERCENT_RATIO%"; exit $STATE_CRITICAL;
+else
+	if (( $(echo "$PERCENT_RATIO >= $WARNING_RATIO" |bc -l) ))
+	then
+		echo "WARNING: ratio of misses/hits is $PERCENT_RATIO%"; exit $STATE_WARNING;
+	fi
+fi
+
+TOTAL_RESTART=$(($oom_restarts+$hash_restarts))
+if (( $(echo "$TOTAL_RESTART >= $CRITICAL_RESTART" |bc -l) ))
+then
+	echo "CRITICAL: Opcache restarts $TOTAL_RESTART times"; exit $STATE_CRITICAL;
+else
+	if (( $(echo "$TOTAL_RESTART >= $WARNING_RESTART" |bc -l) ))
+	then
+		echo "WARNING: Opcache restarts $TOTAL_RESTART times"; exit $STATE_WARNING;
+	fi
+fi
+
+# If all went good exit with OK
+echo "OK: It's all good !"; exit $STATE_OK; 
