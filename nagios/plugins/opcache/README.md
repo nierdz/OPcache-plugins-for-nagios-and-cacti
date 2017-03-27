@@ -40,7 +40,8 @@ OK: Memory 43%, Keys 3%, String Memory 12%, Hits/Misses 6%, Restarts 0`
 
 To go further, you can use some more options which are listed in the help:
 
-`Usage: check_opcache --url http://example.com/opcache_status.php [ --keys %W:%C ] [ --memory %W:%C ] [ --string-memory %W:%C ] [ --ratio %W:%C ] [ --restart W:C ]
+`
+Usage: check_opcache --url http://example.com/opcache_status.php [ --keys %W:%C ] [ --memory %W:%C ] [ --string-memory %W:%C ] [ --ratio %W:%C ] [ --restart W:C ]
 
 Example: check_opcache --url http://example.com/opcache_status.php --keys 70:80 --memory 70:80 --string-memory 70:80 --ratio 5:10 --restart 1:2
 
@@ -65,7 +66,7 @@ Options:
 
 --restart or -F         Number of restarts (oom_restarts and hash_restarts)
                         You need to set numbers of restarts for warning and critical thresholds
-                        Defaults: warning 2, critical 5`
+                        Defaults: warning 2, critical 5
 `
 
 ## Cacti
