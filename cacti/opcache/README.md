@@ -18,18 +18,18 @@ Here is some screenshots:
 
 ## Installation
 
-For a full description of installation process in french check this link: [Superviser Opcache avec Nagios et Cacti](https://mnt-tech.fr/blog/superviser-opcache-nagios-cacti/)
+For a full description of installation process in french, check this link: [Superviser Opcache avec Nagios et Cacti](https://mnt-tech.fr/blog/superviser-opcache-nagios-cacti/)
 
 First, add opcache_status.php in your web folder.
 
-Then, extend your snmpd configuration addind this line:
+Then, extend your snmpd configuration adding this line:
 
 `# To monitor PHP Opcache
 extend phpopcache /usr/bin/curl --silent https://mnt-tech.fr/opcache_status.php`
 
 Of course you need to change the url to opcache_status.php according to your situation.
 
-Restart snmmpd daemon
+Restart snmmpd daemon.
 
 Verify everything is working fine, first with curl then using snmpwalk:
 
