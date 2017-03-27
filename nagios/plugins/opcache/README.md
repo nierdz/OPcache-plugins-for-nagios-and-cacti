@@ -2,10 +2,9 @@
 
 This Nagios plugin permits to monitor various metrics on PHP Opcache:
 * Ratio hits/misses
-* Cached keys
-* Cached scripts
 * Interned strings memory usage
 * Memory usage
+* Restarts
 
 ## Installation
 
@@ -67,6 +66,10 @@ Options:
 --restart or -F         Number of restarts (oom_restarts and hash_restarts)
                         You need to set numbers of restarts for warning and critical thresholds
                         Defaults: warning 2, critical 5`
+                        
+## Cacti
+
+If you need a cacti templates to collect these metrics, check [Cacti Opcache template](https://github.com/nierdz/admintools/tree/master/cacti/opcache)
 
 ## License
 
