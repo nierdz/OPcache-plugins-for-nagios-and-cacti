@@ -55,8 +55,8 @@ Options:
                         Defaults: warning 2, critical 5
 
 Note: You need curl to make this plugin work.
-      You also need opcache_status.php file (check https://github.com/...
-      For some explanation on this plugin and the Cacti version you can read this blog post (French)
+      You also need opcache_status.php file (check https://github.com/nierdz/admintools/tree/master/nagios/plugins/opcache)
+      For some explanation on this plugin and the Cacti version you can read this blog post (French) https://mnt-tech.fr/blog/superviser-opcache-nagios-cacti/
 "
 }
 
