@@ -52,6 +52,10 @@ NET-SNMP-EXTEND-MIB::nsExtendOutLine."phpopcache".10 = STRING: 12558536`
 
 If all went good you can now import the cacti template and start adding graphics to your devices.
 
+## Nagios
+
+If you need some alerting check my [Opcache Nagios plugin](https://github.com/nierdz/admintools/tree/master/nagios/plugins/opcache)
+
 ## Credits
 
 All credits goes to Glen Pitt-Pladdy [Original Opcache Cacti template](https://github.com/glenpp/cacti-php-opcache)
