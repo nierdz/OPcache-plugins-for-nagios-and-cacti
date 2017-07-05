@@ -2,6 +2,7 @@
 # Get current swap usage for all running processes
 # Erik Ljungstrom 27/05/2011
 # Modified by Mikko Rantalainen 2012-08-09
+# Modified by Kévin MET 2017-07-05
 # Pipe the output to "sort -nk3" to get sorted output
 SUM=0
 OVERALL=0
@@ -11,12 +12,12 @@ do
     PROGNAME=`ps -p $PID -o comm --no-headers`
     for SWAP in `grep Swap $DIR/smaps 2>/dev/null | awk '{ print $2 }'`
     do
-        let SUM=$SUM+$SWAP
+		let SUM=$SUM+$(($SWAP/1024))
     done
     if (( $SUM > 0 )); then
-        echo "PID=$PID swapped $SUM KB ($PROGNAME)"
+        echo "PID=$PID swapped $SUM MB ($PROGNAME)"
     fi
     let OVERALL=$OVERALL+$SUM
     SUM=0
 done
-echo "Overall swap used: $OVERALL KB"
+echo "Overall swap used: $OVERALL MB"
