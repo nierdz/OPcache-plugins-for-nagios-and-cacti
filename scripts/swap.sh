@@ -1,23 +1,20 @@
 #!/bin/bash 
-# Get current swap usage for all running processes
-# Erik Ljungstrom 27/05/2011
-# Modified by Mikko Rantalainen 2012-08-09
-# Modified by Kévin MET 2017-07-05
-# Pipe the output to "sort -nk3" to get sorted output
-SUM=0
+# Get swap used per process
+# Not really accurate but useful to get the swap hungry one !
+
 OVERALL=0
-for DIR in `find /proc/ -maxdepth 1 -type d -regex "^/proc/[0-9]+"`
+for STATUS in /proc/[0-9]*/status
 do
-    PID=`echo $DIR | cut -d / -f 3`
-    PROGNAME=`ps -p $PID -o comm --no-headers`
-    for SWAP in `grep Swap $DIR/smaps 2>/dev/null | awk '{ print $2 }'`
-    do
-		let SUM=$SUM+$(($SWAP/1024))
-    done
-    if (( $SUM > 0 )); then
-        echo "PID=$PID swapped $SUM MB ($PROGNAME)"
-    fi
-    let OVERALL=$OVERALL+$SUM
-    SUM=0
+	PID=$(echo ${STATUS} | cut -d / -f 3)
+	PROGNAME=$(ps -p $PID -o comm --no-headers)
+	declare -i SUM=0
+	#SUM=$(awk '/Swap/{ sum += $2; mb = sum / 1024 } END { print int( mb ) }' /proc/$PID/smaps 2>/dev/null)
+
+	# This one is more accurate
+	SUM=$(awk '/VmSwap:/{ print int( $2 ) }' ${STATUS})
+	if (( ${SUM} > 0 )); then
+		echo "PID=$PID swapped $(($SUM/1024)) MB ($PROGNAME)"
+		OVERALL=$(($OVERALL + $SUM))
+	fi
 done
-echo "Overall swap used: $OVERALL MB"
+echo "Overall swap used: $(($OVERALL/1024)) MB"
