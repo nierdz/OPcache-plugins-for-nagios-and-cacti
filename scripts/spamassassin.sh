@@ -54,7 +54,7 @@ do
 done
 
 # Remove spams 
-#doveadm expunge -A mailbox Junk all
+doveadm expunge -A mailbox Junk all
 
 # Remove domains in blacklist from inbox folder, so if you want to remove a blacklisted domain, just add mail to your inbox  
 # Loop around all the spam directories and extract the spammy domains
