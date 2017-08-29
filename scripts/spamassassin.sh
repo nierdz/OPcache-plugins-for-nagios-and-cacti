@@ -2,14 +2,14 @@
 # Author Kevin MET https://mnt-tech.fr/
 # The first part sends all domains from mails in junk folder to spamassassin's blacklist
 # The second part learn ham and spam
-# The last part deletes mails in spam folder
+# The third part deletes mails in spam folder
+# The last part remove blacklisted domains from inbox mails
 
 # Directories containing mail in Maildir format
 USER_DIR[0]=/var/vmail/vmail1/mnt-tech.fr/k/e/v/kevin.met-2015.09.14.16.40.21/Maildir
-USER_DIR[1]=/var/vmail/vmail1/ad-tech.ovh/a/d/m/admin-2015.09.14.21.55.14/Maildir
 
 # Domains you don't want in blacklist and whitelist. Typically domains where you're using a contact form
-NEUTRAL_DOMAIN[0]="tenminutestokill.com"
+NEUTRAL_DOMAIN[0]="mad-rabbit.com"
 
 # Other parameters
 SPAM_DIR=".Junk"
@@ -19,7 +19,7 @@ WHITELIST_CF="/etc/spamassassin/whitelist.cf"
 # Loop around all the spam directories and extract the spammy domains
 for dir in "${USER_DIR[@]}"
 do
-	grep -R "From: \|Reply-To: " $dir/$SPAM_DIR | grep -o "<.*>" | cut -d @ -f 2 | sed 's/>//' >> /tmp/bl-domains-$$
+	grep -R "From: \|Reply-To: " $dir/$SPAM_DIR | grep -o "<.*>" | cut -d @ -f 2 | sed 's/>//' | grep -E '^(([a-zA-Z](-?[a-zA-Z0-9])*)\.)*[a-zA-Z](-?[a-zA-Z0-9])+\.[a-zA-Z]{2,}$' >> /tmp/bl-domains-$$
 done
 
 # Send all domains from blacklist.cf to the tmp file
@@ -54,4 +54,22 @@ do
 done
 
 # Remove spams 
-doveadm expunge -A mailbox Junk all
+#doveadm expunge -A mailbox Junk all
+
+# Remove domains in blacklist from inbox folder, so if you want to remove a blacklisted domain, just add mail to your inbox  
+# Loop around all the spam directories and extract the spammy domains
+for dir in "${USER_DIR[@]}"
+do
+	grep -R "From: \|Reply-To: " "$dir/cur/" | grep -o "<.*>" | cut -d @ -f 2 | sed 's/>//' | grep -E '^(([a-zA-Z](-?[a-zA-Z0-9])*)\.)*[a-zA-Z](-?[a-zA-Z0-9])+\.[a-zA-Z]{2,}$' >> /tmp/wl-domains-$$
+done
+
+# Remove duplicates
+sort -u -o /tmp/wl-domains-$$ /tmp/wl-domains-$$
+
+# We loop around this file containing wl domains and delete them from blacklist
+for domain in $(cat /tmp/wl-domains-$$)
+do
+	sed -i "/$domain/d" ${BLACKLIST_CF}
+done
+rm /tmp/wl-domains-$$
+
