@@ -13,8 +13,6 @@
 # Version 1.0 2017-08-30
 # First version, only supports one certificate per vhost file
 
-#openssl rsa -in /etc/letsencrypt/live/adplusplus.fr/fullchain.pem -check
-
 BASENAME=$(basename "$0")
 RED='\033[0;31m'
 GREEN='\033[0;32m'
