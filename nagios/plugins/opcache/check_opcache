@@ -21,9 +21,12 @@ Version: $REVISION\n"
 
 # States
 STATE_OK=0
+STATE_OK=0
 STATE_WARNING=1
 STATE_CRITICAL=2
-STATE_UNKNOWN=3
+
+STATE=$STATE_OK
+
 
 print_usage() {
 	echo "
@@ -179,10 +182,15 @@ num_cached_keys=$(echo $RESULTS | awk '{print $5}')
 max_cached_keys=$(echo $RESULTS | awk '{print $6}')
 used_strmemory=$(echo $RESULTS | awk '{print $9}')
 free_strmemory=$(echo $RESULTS | awk '{print $10}')
+buffsize_strmemory=$(echo $RESULTS | awk '{print $11}')
 hits=$(echo $RESULTS | awk '{print $7}')
 misses=$(echo $RESULTS | awk '{print $8}')
-oom_restarts=$(echo $RESULTS | awk '{print $11}')
-hash_restarts=$(echo $RESULTS | awk '{print $12}')
+oom_restarts=$(echo $RESULTS | awk '{print $12}')
+hash_restarts=$(echo $RESULTS | awk '{print $13}')
+buff_size=$(echo $RESULTS | awk '{print $14}')
+memory_consumption=$(echo $RESULTS | awk '{print $15}')
+is_enabled=$(echo $RESULTS | awk '{print $16}')
+version=$(echo $RESULTS | awk '{print $17}')
 
 # Parse options
 WARNING_MEMORY=$(echo $MEMORY | cut -d: -f1)
@@ -197,60 +205,72 @@ WARNING_RESTART=$(echo $RESTART | cut -d: -f1)
 CRITICAL_RESTART=$(echo $RESTART | cut -d: -f2)
 
 # Verifications
-PERCENT_MEMORY=$((100*$used_memory/$free_memory))
+if [[ $is_enabled -ne 0 ]]
+then
+	echo "CRITICAL: OPcache is disabled"; exit $STATE_CRITICAL;
+fi
+
+PERCENT_MEMORY=$((100*$used_memory/$buff_size))
 if (( $(echo "$PERCENT_MEMORY >= $CRITICAL_MEMORY" |bc -l) ))
 then
-	echo "CRITICAL: $PERCENT_MEMORY% of memory used"; exit $STATE_CRITICAL;
+	echo -n "CRITICAL: $PERCENT_MEMORY% of memory used"; STATE=$STATE_CRITICAL;
 else
 	if (( $(echo "$PERCENT_MEMORY >= $WARNING_MEMORY" |bc -l) ))
 	then
-		echo "WARNING: $PERCENT_MEMORY% of memory used"; exit $STATE_WARNING;
+		echo -n "WARNING: $PERCENT_MEMORY% of memory used"; STATE=$STATE_WARNING;
 	fi
 fi	
 
 PERCENT_KEYS=$((100*$num_cached_keys/$max_cached_keys))
 if (( $(echo "$PERCENT_KEYS >= $CRITICAL_KEYS" |bc -l) ))
 then
-	echo "CRITICAL: $PERCENT_KEYS% of keys used"; exit $STATE_CRITICAL;
+	echo -n "CRITICAL: $PERCENT_KEYS% of keys used"; STATE=$STATE_CRITICAL;
 else
 	if (( $(echo "$PERCENT_KEYS >= $WARNING_KEYS" |bc -l) ))
 	then
-		echo "WARNING: $PERCENT_KEYS% of keys used"; exit $STATE_WARNING;
+		echo -n "WARNING: $PERCENT_KEYS% of keys used"; STATE=$STATE_WARNING;
 	fi
 fi
 
-PERCENT_STRMEMORY=$((100*$used_strmemory/$free_strmemory))
+PERCENT_STRMEMORY=$((100*$used_strmemory/$buffsize_strmemory))
 if (( $(echo "$PERCENT_STRMEMORY >= $CRITICAL_STRMEMORY" |bc -l) ))
 then
-	echo "CRITICAL: $PERCENT_STRMEMORY% of string memory used"; exit $STATE_CRITICAL;
+	echo -n "CRITICAL: $PERCENT_STRMEMORY% of string memory used"; STATE=$STATE_CRITICAL;
 else
 	if (( $(echo "$PERCENT_STRMEMORY >= $WARNING_STRMEMORY" |bc -l) ))
 	then
-		echo "WARNING: $PERCENT_STRMEMORY% of string memory used"; exit $STATE_WARNING;
+		echo -n "WARNING: $PERCENT_STRMEMORY% of string memory used"; STATE=$STATE_WARNING;
 	fi
 fi	
 
 PERCENT_RATIO=$((100*$misses/$hits))
 if (( $(echo "$PERCENT_RATIO >= $CRITICAL_RATIO" |bc -l) ))
 then
-	echo "CRITICAL: ratio of misses/hits is $PERCENT_RATIO%"; exit $STATE_CRITICAL;
+	echo -n "CRITICAL: ratio of misses/hits is $PERCENT_RATIO%"; STATE=$STATE_CRITICAL;
 else
 	if (( $(echo "$PERCENT_RATIO >= $WARNING_RATIO" |bc -l) ))
 	then
-		echo "WARNING: ratio of misses/hits is $PERCENT_RATIO%"; exit $STATE_WARNING;
+		echo -n "WARNING: ratio of misses/hits is $PERCENT_RATIO%"; STATE=$STATE_WARNING;
 	fi
 fi
 
 TOTAL_RESTART=$(($oom_restarts+$hash_restarts))
 if (( $(echo "$TOTAL_RESTART >= $CRITICAL_RESTART" |bc -l) ))
 then
-	echo "CRITICAL: Opcache restarts $TOTAL_RESTART times"; exit $STATE_CRITICAL;
+	echo -n "CRITICAL: Opcache restarts $TOTAL_RESTART times"; STATE=$STATE_CRITICAL;
 else
 	if (( $(echo "$TOTAL_RESTART >= $WARNING_RESTART" |bc -l) ))
 	then
-		echo "WARNING: Opcache restarts $TOTAL_RESTART times"; exit $STATE_WARNING;
+		echo -n "WARNING: Opcache restarts $TOTAL_RESTART times"; STATE=$STATE_WARNING;
 	fi
 fi
 
 # If all went good exit with OK
-echo "OK: Memory $PERCENT_MEMORY%, Keys $PERCENT_KEYS%, String Memory $PERCENT_STRMEMORY%, Hits/Misses $PERCENT_RATIO%, Restarts $TOTAL_RESTART"; exit $STATE_OK; 
+
+if [[ $STATE == 0 ]]; then
+	echo -n "OK"
+fi
+
+echo " - $version| used_memory=$(($used_memory/1024/1024))MB used_memory_ratio=$PERCENT_MEMORY% num_cached_keys=$num_cached_keys keys_ratio=$PERCENT_KEYS% used_strmemory=$(($used_strmemory/1024/1024))MB used_strmemory_ratio=$PERCENT_STRMEMORY% hits_misses_ratio=$PERCENT_RATIO% total_restarts=$TOTAL_RESTART"
+
+exit $STATE
