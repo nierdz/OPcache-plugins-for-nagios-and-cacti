@@ -7,6 +7,8 @@
 
 # Directories containing mail in Maildir format
 USER_DIR[0]=/var/vmail/vmail1/mnt-tech.fr/k/e/v/kevin.met-2015.09.14.16.40.21/Maildir
+USER_DIR[1]=/var/vmail/vmail1/mnt-tech.fr/k/e/v/kevin.met-2015.09.14.16.40.21/Maildir/.FRnOG
+USER_DIR[2]=/var/vmail/vmail1/mnt-tech.fr/k/e/v/kevin.met-2015.09.14.16.40.21/Maildir/.FRsAG
 
 # Domains you don't want in blacklist and whitelist. Typically domains where you're using a contact form
 NEUTRAL_DOMAIN[0]="mad-rabbit.com"
@@ -53,8 +55,8 @@ do
 	sa-learn --ham --username=amavis $dir/cur
 done
 
-# Remove spams 
-doveadm expunge -A mailbox Junk all
+# Remove spams older than 1 week 
+doveadm expunge -A mailbox Junk sentbefore 1w
 
 # Remove domains in blacklist from inbox folder, so if you want to remove a blacklisted domain, just add mail to your inbox  
 # Loop around all the spam directories and extract the spammy domains
@@ -72,4 +74,3 @@ do
 	sed -i "/$domain/d" ${BLACKLIST_CF}
 done
 rm /tmp/wl-domains-$$
-
